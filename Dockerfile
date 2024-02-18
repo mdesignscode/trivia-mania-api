@@ -9,7 +9,7 @@ COPY . .
 
 RUN echo ":::::::::::::::::::::::::::::::::::::::::"
 RUN pwd
-RUN ls
+RUN ls prisma
 
 RUN bun install
 
