@@ -1,6 +1,6 @@
 FROM oven/bun:1
 WORKDIR /trivia-mania-api
-COPY . .
+COPY . /trivia-mania-api
 RUN bun install
 
 ARG PORT
