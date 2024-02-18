@@ -1,32 +1,5 @@
 import prisma from "./lib/prisma";
 
-const triviaCategories = [
-  'Sports',
-  'Entertainment: Video Games',
-  'Geography',
-  'Entertainment: Books',
-  'History',
-  'Entertainment: Television',
-  'Entertainment: Cartoon & Animations',
-  'Entertainment: Music',
-  'Science & Nature',
-  'Celebrities',
-  'General Knowledge',
-  'Politics',
-  'Entertainment: Japanese Anime & Manga',
-  'Entertainment: Film',
-  'Entertainment: Comics',
-  'Vehicles',
-  'Mythology',
-  'Entertainment: Musicals & Theatres',
-  'Science: Mathematics',
-  'Science: Computers',
-  'Entertainment: Board Games',
-  'Art',
-  'Science: Gadgets',
-  'Animals'
-]
-
 main();
 
 async function main() {
