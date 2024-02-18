@@ -7,11 +7,11 @@ RUN ls
 
 COPY . .
 
+RUN bun install
+
 RUN echo ":::::::::::::::::::::::::::::::::::::::::"
 RUN pwd
 RUN ls prisma
-
-RUN bun install
 
 ARG PORT
 EXPOSE ${PORT:-3000}
