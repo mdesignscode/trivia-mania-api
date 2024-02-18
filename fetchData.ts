@@ -30,7 +30,7 @@ const triviaCategories = [
 main();
 
 async function main() {
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 50; i++) {
     const url = "https://the-trivia-api.com/v2/questions?limit=50",
       request = await fetch(url),
       response = await request.json()
