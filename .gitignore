@@ -1,4 +1,4 @@
 node_modules
 prisma/migrations/migration_lock.toml
 .env
-prisma/generated
+# prisma/generated
