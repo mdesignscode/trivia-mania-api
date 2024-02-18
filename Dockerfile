@@ -1,5 +1,5 @@
 FROM oven/bun:1
-WORKDIR /
+WORKDIR /trivia-mania-api
 COPY . .
 RUN bun install
 
