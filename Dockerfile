@@ -7,17 +7,9 @@ RUN apt-get update && apt-get install -y curl bash
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs
 
-RUN echo ":::::::::::::::::::::::::::::::::::::::::"
-RUN pwd
-RUN ls
-
 COPY . .
 
 RUN bun install
-
-RUN echo ":::::::::::::::::::::::::::::::::::::::::"
-RUN pwd
-RUN ls prisma
 
 ARG PORT
 EXPOSE ${PORT:-3000}
