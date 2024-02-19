@@ -13,12 +13,14 @@ async function main() {
         question: question.question.text,
         difficulty: question.difficulty,
         answers: question.incorrectAnswers.concat([question.correctAnswer]),
-        category: splitAndCapitalize(question.category),
-        correctAnswer: question.correctAnswer
+        correctAnswer: question.correctAnswer,
+        category: splitAndCapitalize(question.category)
       }
 
       try {
-        console.log(await prisma.question.create({ data: newQuestion }))
+        console.log(await prisma.question.create({
+          data: newQuestion,
+        }))
       } catch (error) {
         ;
       }
