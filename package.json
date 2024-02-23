@@ -5,12 +5,12 @@
   },
   "dependencies": {
     "@clerk/clerk-js": "^4.70.0",
-    "@prisma/client": "5.9.1",
+    "@prisma/client": "^5.10.2",
     "hono": "^4.0.4",
-    "prisma": "^5.9.1",
     "svix": "^1.18.0"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "prisma": "^5.10.2"
   }
 }

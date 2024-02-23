@@ -22,10 +22,11 @@ model Question {
 }
 
 model User {
-  id          String     @id
-  username    String
-  stats       UserStats? @relation(fields: [userStatsId], references: [id])
-  userStatsId Int?
+  id                String     @id
+  username          String
+  stats             UserStats? @relation(fields: [userStatsId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userStatsId       Int?
+  answeredQuestions Int[]
 }
 
 model UserStats {
@@ -34,7 +35,7 @@ model UserStats {
   difficultyStats   DifficulyStat[]
   categoryStats     CategoryStat[]
   avatar            String?
-  answeredQuestions String[]
+  answeredQuestions Int[]
   User              User[]
   statsTotalId      Int
 }
@@ -50,6 +51,7 @@ model DifficulyStat {
   id              Int           @id @default(autoincrement())
   answered        Int
   correctAnswered Int
+  difficulty      String
   UserStats       UserStats?    @relation(fields: [userStatsId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userStatsId     Int?
   CategoryStat    CategoryStat? @relation(fields: [categoryStatId], references: [id], onDelete: Cascade, onUpdate: Cascade)
@@ -58,6 +60,7 @@ model DifficulyStat {
 
 model CategoryStat {
   id              Int             @id @default(autoincrement())
+  category        String
   difficultyStats DifficulyStat[]
   UserStats       UserStats?      @relation(fields: [userStatsId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userStatsId     Int?

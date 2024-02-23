@@ -46,4 +46,38 @@ questions.get('/stats', async (c) => {
   return c.json({ difficulties: difficultyStats, categories: categoriesStats })
 })
 
+questions.post('/play', async (c) => {
+  console.log("new questions fetched!")
+  const body = await c.req.json(),
+    difficultyCheck = body.difficulty,
+    categories = body.categories,
+    user: TUser = body.user
+
+  if (!user) return new Response("User object missing", { status: 400 })
+
+  if (!difficultyCheck) return new Response("No difficulty provided", { status: 400 })
+
+  const difficulty = body.difficulty === "all difficulties" ? undefined : body.difficulty
+
+  if (!categories || !categories.length || categories.includes("all difficulties")) return c.json(await prisma.question.findMany({
+    where: {
+      difficulty,
+      id: {
+        notIn: user.answeredQuestions
+      }
+    }
+  }))
+
+  return c.json(await prisma.question.findMany({
+    where: {
+      difficulty, category: {
+        in: categories.split(",")
+      },
+      id: {
+        notIn: user.answeredQuestions
+      }
+    }
+  }))
+})
+
 export default questions
