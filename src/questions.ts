@@ -47,7 +47,6 @@ questions.get('/stats', async (c) => {
 })
 
 questions.post('/play', async (c) => {
-  console.log("new questions fetched!")
   const body = await c.req.json(),
     difficultyCheck = body.difficulty,
     categories = body.categories,
@@ -68,7 +67,7 @@ questions.post('/play', async (c) => {
     }
   }))
 
-  return c.json(await prisma.question.findMany({
+  const playQuestions = await prisma.question.findMany({
     where: {
       difficulty, category: {
         in: categories.split(",")
@@ -77,7 +76,15 @@ questions.post('/play', async (c) => {
         notIn: user.answeredQuestions
       }
     }
-  }))
+  })
+
+  // Fisher-Yates shuffle algorithm
+  for (let i = playQuestions.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [playQuestions[i], playQuestions[j]] = [playQuestions[j], playQuestions[i]];
+  }
+
+  return c.json(playQuestions)
 })
 
 export default questions
