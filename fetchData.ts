@@ -8,11 +8,20 @@ async function main() {
       request = await fetch(url),
       response = await request.json()
 
+
     response.forEach(async (question: any) => {
+      const answers = question.incorrectAnswers.concat([question.correctAnswer])
+
+      // Fisher-Yates shuffle algorithm
+      for (let i = answers.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [answers[i], answers[j]] = [answers[j], answers[i]];
+      }
+
       const newQuestion: Omit<TQuestion, "id"> = {
         question: question.question.text,
         difficulty: question.difficulty,
-        answers: question.incorrectAnswers.concat([question.correctAnswer]),
+        answers,
         correctAnswer: question.correctAnswer,
         category: splitAndCapitalize(question.category)
       }
