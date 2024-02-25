@@ -3,11 +3,25 @@ import prisma from '@/lib/prisma'
 
 const questions = new Hono()
 
-questions.get('/stats', async (c) => {
+questions.post('/stats', async (c) => {
+  const body = await c.req.json(),
+    userId = body.userId;
+
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId
+    }
+  })
+
   let difficultiesCount = 0
   const questionsByDifficulty = await prisma.question.groupBy({
     by: ["difficulty"],
-    _count: true
+    _count: true,
+    where: {
+      id: {
+        notIn: user?.answeredQuestions
+      }
+    }
   }),
     difficultyStats = Object.fromEntries(questionsByDifficulty.map(q => {
       difficultiesCount += q._count
