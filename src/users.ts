@@ -57,16 +57,21 @@ users.post("/topTenPosition", async (c) => {
 users.get("/topTenPlayers", async (c) => {
   const allUsers: TUser[] = await prisma.user.findMany({
     ...includeUser,
-    orderBy: [{ correctAnswered: "asc" }],
-    take: 10
+    orderBy: [{ correctAnswered: "desc" }],
+    take: 10,
+    where: {
+      correctAnswered: {
+        not: 0
+      }
+    }
   }),
     topTenPlayers = await Promise.all(allUsers.map(async user => ({
       user,
-      stats: await prisma.categoryStat.findMany({
+      stats: (await prisma.categoryStat.findMany({
         where: {
           userId: user?.id
         }
-      })
+      }))
     })))
 
   return c.json(topTenPlayers)
