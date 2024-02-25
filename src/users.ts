@@ -170,7 +170,6 @@ users.post("/updateStats", async (c) => {
           push: question.id
         },
         correctAnswered: answeredCorrect ? user.correctAnswered + 1 : user.correctAnswered,
-        totalAnswered: user.totalAnswered + 1,
       },
       include: {
         mediumStats: true,

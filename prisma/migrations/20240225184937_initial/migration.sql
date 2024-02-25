@@ -17,7 +17,6 @@ CREATE TABLE "User" (
     "avatar" TEXT NOT NULL,
     "answeredQuestions" INTEGER[],
     "correctAnswered" INTEGER NOT NULL,
-    "totalAnswered" INTEGER NOT NULL,
     "easyStatId" INTEGER NOT NULL,
     "mediumStatId" INTEGER NOT NULL,
     "hardStatId" INTEGER NOT NULL,
