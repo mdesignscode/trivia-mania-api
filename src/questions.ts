@@ -7,11 +7,11 @@ questions.post('/stats', async (c) => {
   const body = await c.req.json(),
     userId = body.userId;
 
-  const user = await prisma.user.findUnique({
+  const user = userId ? await prisma.user.findUnique({
     where: {
       id: userId
     }
-  })
+  }) : undefined
 
   let difficultiesCount = 0
   const questionsByDifficulty = await prisma.question.groupBy({
