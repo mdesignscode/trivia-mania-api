@@ -4,7 +4,6 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@clerk/clerk-js": "^4.70.0",
     "@prisma/client": "^5.10.2",
     "hono": "^4.0.4",
     "svix": "^1.18.0"
